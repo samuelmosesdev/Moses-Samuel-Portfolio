@@ -81,3 +81,12 @@ index = 0;
 setInterval(changeRole,2000);
 
 changeRole();
+
+/* HAMBURGER MENU */
+
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
+
+hamburger.addEventListener("click", () => {
+navLinks.classList.toggle("active");
+});
