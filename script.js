@@ -31,10 +31,32 @@ item.style.display = "none";
 });
 
 
-
 /* HERO TEXT ROTATION */
 
 const roles = [
+"Graphic Designer",
+"Product Designer",
+"Visual Designer",
+"Brand Designer"
+];
+
+let index = 0;
+const roleText = document.getElementById("roles");
+
+function changeRole(){
+
+roleText.textContent = roles[index];
+
+index++;
+
+if(index >= roles.length){
+index = 0;
+}
+
+}
+
+setInterval(changeRole,2000);
+changeRole();const roles = [
 "Graphic Designer",
 "Product Designer",
 "Visual Designer",
