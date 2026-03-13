@@ -141,7 +141,39 @@ color:#ff7a00;
 text-decoration:none;
 border-radius:6px;
 }
+/* HERO LAYOUT */
 
+.hero-container{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:60px;
+}
+
+.hero-left{
+max-width:600px;
+}
+
+/* ABOUT BOX */
+
+.about-box{
+background:#111;
+padding:30px;
+border-radius:12px;
+max-width:350px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.about-box h3{
+font-family:'Clash Display';
+margin-bottom:15px;
+color:#0022f0;
+}
+
+.about-box p{
+color:#bbb;
+line-height:1.6;
+}
 /* PORTFOLIO */
 
 .portfolio{
@@ -314,5 +346,13 @@ align-items:center;
 .portfolio-grid{
 grid-template-columns:1fr 1fr;
 }
+.hero-container{
+flex-direction:column;
+text-align:center;
+}
 
+.about-box{
+max-width:100%;
+margin-top:30px;
+}
 }
