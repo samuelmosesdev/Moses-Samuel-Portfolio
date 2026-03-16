@@ -7,7 +7,7 @@ filterButtons.forEach(button => {
 
 button.addEventListener("click", () => {
 
-document.querySelector(".active").classList.remove("active");
+filterButtons.forEach(btn => btn.classList.remove("active"));
 button.classList.add("active");
 
 let filter = button.getAttribute("data-filter");
@@ -29,7 +29,6 @@ item.style.display = "none";
 });
 
 });
-
 
 /* HERO TEXT ROTATION */
 
