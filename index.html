@@ -8,20 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0906;
-    --bg2: #100f0c;
-    --surface: #161410;
-    --gold: #c9a84c;
-    --gold2: #e6c97a;
-    --cream: #f0e8d8;
-    --muted: #6b6356;
-    --text: #ddd5c5;
-    --white: #faf7f2;
-    --accent: #8b4513;
+    --bg: #050e0d;
+    --bg2: #091512;
+    --surface: #0d1e1a;
+    --green: #25c98a;
+    --green2: #4de0a8;
+    --blue: #2fa8e0;
+    --blue2: #60c4f0;
+    --teal: #1ab8b8;
+    --muted: #3f7068;
+    --text: #b8d4cf;
+    --white: #edfaf6;
+    --dim: #243d38;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -30,143 +31,89 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
-    cursor: none;
   }
 
-  /* Custom cursor */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.5);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: transform 0.15s ease, width 0.3s, height 0.3s, border-color 0.3s;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring.hover { width: 56px; height: 56px; border-color: var(--gold); }
-
-  /* Grain overlay */
   body::before {
     content: '';
     position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9990;
-    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9990; opacity: 0.4;
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.5rem 4rem;
     border-bottom: 1px solid transparent;
     transition: border-color 0.4s, background 0.4s, padding 0.4s;
   }
   nav.scrolled {
-    background: rgba(10,9,6,0.92);
-    backdrop-filter: blur(16px);
-    border-color: rgba(201,168,76,0.15);
+    background: rgba(5,14,13,0.94);
+    backdrop-filter: blur(18px);
+    border-color: rgba(37,201,138,0.15);
     padding: 1rem 4rem;
   }
   .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.15em;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     text-decoration: none;
   }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; transition: color 0.3s;
   }
-  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover { color: var(--green); }
   .nav-cta {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--bg);
-    background: var(--gold);
-    padding: 0.6rem 1.5rem;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s;
+    font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    color: var(--bg); padding: 0.6rem 1.5rem; text-decoration: none;
+    transition: opacity 0.3s, transform 0.2s;
   }
-  .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
-  /* ── HERO ── */
+  /* HERO */
   .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 0 4rem;
-    gap: 4rem;
-    position: relative;
-    overflow: hidden;
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 0 4rem; gap: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -15%; right: 5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(37,201,138,0.08) 0%, rgba(47,168,224,0.05) 50%, transparent 70%);
+    pointer-events: none;
   }
   .hero::after {
-    content: '';
-    position: absolute;
-    top: -20%; right: -10%;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    content: ''; position: absolute; bottom: 10%; left: -5%;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(47,168,224,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 1.5rem;
     display: flex; align-items: center; gap: 0.75rem;
     opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
   }
   .hero-label::before {
-    content: '';
-    width: 30px; height: 1px;
-    background: var(--gold);
+    content: ''; width: 30px; height: 1px;
+    background: linear-gradient(90deg, var(--green), var(--blue));
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 7vw, 6.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 1rem;
+    font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 300; line-height: 1.05;
+    color: var(--white); margin-bottom: 1rem;
     opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
   }
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hero-title .g { font-style: italic; color: var(--green); }
+  .hero-title .b { font-style: italic; color: var(--blue); }
   .hero-sub {
-    font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.8;
-    max-width: 440px;
-    margin-bottom: 2.5rem;
+    font-size: 1rem; color: var(--muted); line-height: 1.8;
+    max-width: 440px; margin-bottom: 2.5rem;
     opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
   }
   .hero-actions {
@@ -174,650 +121,300 @@
     opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
   }
   .btn-primary {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.78rem; font-weight: 600;
+    font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600;
     letter-spacing: 0.1em; text-transform: uppercase;
-    background: var(--gold);
-    color: var(--bg);
-    padding: 1rem 2rem;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    color: var(--bg); padding: 1rem 2rem; text-decoration: none;
     display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s;
   }
-  .btn-primary:hover {
-    background: var(--gold2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(201,168,76,0.25);
-  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,201,138,0.3); }
   .btn-secondary {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.78rem; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(201,168,76,0.3);
-    padding-bottom: 2px;
-    transition: border-color 0.3s;
+    font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue);
+    text-decoration: none; border-bottom: 1px solid rgba(47,168,224,0.35);
+    padding-bottom: 2px; transition: border-color 0.3s, color 0.3s;
   }
-  .btn-secondary:hover { border-color: var(--gold); }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue2); }
 
-  .hero-right {
-    position: relative;
-    opacity: 0; animation: fadeLeft 1s 0.4s forwards;
-  }
+  .hero-right { position: relative; opacity: 0; animation: fadeLeft 1s 0.4s forwards; }
   .hero-img-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4/5;
-    max-width: 440px;
-    margin-left: auto;
+    position: relative; width: 100%; aspect-ratio: 4/5;
+    max-width: 440px; margin-left: auto;
   }
   .hero-img-frame::before {
-    content: '';
-    position: absolute;
-    inset: -12px;
-    border: 1px solid rgba(201,168,76,0.2);
-    z-index: 0;
+    content: ''; position: absolute; inset: -12px;
+    border: 1px solid rgba(37,201,138,0.2); z-index: 0;
   }
   .hero-img-frame::after {
-    content: '';
-    position: absolute;
-    bottom: -24px; right: -24px;
-    width: 80%; height: 80%;
-    border: 1px solid rgba(201,168,76,0.1);
-    z-index: 0;
+    content: ''; position: absolute; bottom: -24px; right: -24px;
+    width: 80%; height: 80%; border: 1px solid rgba(47,168,224,0.12); z-index: 0;
   }
   .hero-img-frame img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    position: relative; z-index: 1;
-    filter: grayscale(20%) contrast(1.05);
+    width: 100%; height: 100%; object-fit: cover;
+    position: relative; z-index: 1; filter: grayscale(15%) contrast(1.05);
   }
   .hero-img-overlay {
-    position: absolute;
-    bottom: 1.5rem; left: -2rem;
-    background: var(--surface);
-    border: 1px solid rgba(201,168,76,0.2);
-    padding: 1rem 1.5rem;
-    z-index: 2;
-    backdrop-filter: blur(10px);
+    position: absolute; bottom: 1.5rem; left: -2rem;
+    background: var(--surface); border: 1px solid rgba(37,201,138,0.25);
+    padding: 1rem 1.5rem; z-index: 2; backdrop-filter: blur(10px);
   }
   .hero-img-overlay .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
+    font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+    font-weight: 300; color: var(--green); line-height: 1;
   }
   .hero-img-overlay .stat-label {
-    font-size: 0.7rem; letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.2rem;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-top: 0.2rem;
   }
-
-  /* Scroll indicator */
   .scroll-hint {
-    position: absolute;
-    bottom: 2rem; left: 50%;
-    transform: translateX(-50%);
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
     opacity: 0; animation: fadeUp 1s 1.2s forwards;
   }
-  .scroll-hint span {
-    font-size: 0.65rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--muted);
-  }
+  .scroll-hint span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
   .scroll-line {
     width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
+    background: linear-gradient(to bottom, var(--green), transparent);
     animation: scrollPulse 2s infinite;
   }
 
-  /* ── MARQUEE TICKER ── */
+  /* TICKER */
   .ticker {
-    border-top: 1px solid rgba(201,168,76,0.1);
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-    padding: 0.9rem 0;
-    overflow: hidden;
-    background: var(--bg2);
+    border-top: 1px solid rgba(37,201,138,0.1); border-bottom: 1px solid rgba(37,201,138,0.1);
+    padding: 0.9rem 0; overflow: hidden; background: var(--bg2);
   }
-  .ticker-track {
-    display: flex; gap: 3rem;
-    white-space: nowrap;
-    animation: ticker 20s linear infinite;
-  }
+  .ticker-track { display: flex; gap: 3rem; white-space: nowrap; animation: tickerMove 22s linear infinite; }
   .ticker-item {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    flex-shrink: 0;
+    font-family: 'Syne', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted); flex-shrink: 0;
     display: flex; align-items: center; gap: 1.5rem;
   }
-  .ticker-item .dot {
-    width: 4px; height: 4px;
-    background: var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .ticker-item .dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; background: var(--green); }
+  .ticker-item:nth-child(even) .dot { background: var(--blue); }
+  .ticker-item:nth-child(3n) .dot { background: var(--teal); }
 
-  /* ── SECTIONS COMMON ── */
+  /* SECTIONS */
   section { padding: 7rem 4rem; }
   .section-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
+    font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 1rem;
     display: flex; align-items: center; gap: 0.75rem;
   }
-  .section-label::before { content:''; width:24px; height:1px; background:var(--gold); }
+  .section-label::before {
+    content: ''; width: 24px; height: 1px;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+  }
   h2.section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3.8rem);
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 1rem;
+    font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300;
+    color: var(--white); line-height: 1.1; margin-bottom: 1rem;
   }
-  h2.section-title em { font-style: italic; color: var(--gold); }
+  h2.section-title .g { font-style: italic; color: var(--green); }
+  h2.section-title .b { font-style: italic; color: var(--blue); }
 
-  /* ── STATS BAR ── */
+  /* STATS */
   .stats-bar {
-    padding: 4rem;
-    background: var(--surface);
-    border-top: 1px solid rgba(201,168,76,0.1);
-    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 4rem; background: var(--surface);
+    border-top: 1px solid rgba(37,201,138,0.1); border-bottom: 1px solid rgba(47,168,224,0.1);
   }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-  }
-  .stat-item {
-    text-align: center;
-    padding: 1.5rem 2rem;
-    border-right: 1px solid rgba(201,168,76,0.1);
-  }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-item { text-align: center; padding: 1.5rem 2rem; border-right: 1px solid rgba(37,201,138,0.1); }
   .stat-item:last-child { border-right: none; }
-  .stat-item .num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-  }
-  .stat-item .lbl {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.5rem;
-  }
+  .stat-item:nth-child(1) .num { color: var(--green); }
+  .stat-item:nth-child(2) .num { color: var(--blue); }
+  .stat-item:nth-child(3) .num { color: var(--teal); }
+  .stat-item:nth-child(4) .num { color: var(--green2); }
+  .stat-item .num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; line-height: 1; }
+  .stat-item .lbl { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
 
-  /* ── SERVICES ── */
-  .services-section {
-    background: var(--bg);
-  }
-  .services-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 4rem;
-  }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(201,168,76,0.1);
-  }
-  .service-card {
-    background: var(--bg);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
+  /* SERVICES */
+  .services-section { background: var(--bg); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(37,201,138,0.08); }
+  .service-card { background: var(--bg); padding: 2.5rem; position: relative; overflow: hidden; transition: background 0.4s; }
   .service-card:hover { background: var(--surface); }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+  }
   .service-card:hover::before { transform: scaleX(1); }
-  .service-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    color: rgba(201,168,76,0.3);
-    margin-bottom: 1.5rem;
-  }
-  .service-icon {
-    font-size: 1.8rem;
-    margin-bottom: 1.2rem;
-    filter: grayscale(1) sepia(1) saturate(2) hue-rotate(10deg);
-  }
-  .service-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.02em;
-  }
-  .service-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-  .service-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    color: var(--gold);
-  }
-  .service-price span {
-    font-size: 0.7rem;
-    font-family: 'DM Sans', sans-serif;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-left: 0.3rem;
-  }
+  .service-card:nth-child(3n+1)::before { background: var(--green); }
+  .service-card:nth-child(3n+2)::before { background: var(--blue); }
+  .service-card:nth-child(3n)::before   { background: var(--teal); }
+  .service-card:nth-child(3n+1) .service-price { color: var(--green); }
+  .service-card:nth-child(3n+2) .service-price { color: var(--blue); }
+  .service-card:nth-child(3n)   .service-price { color: var(--teal); }
+  .service-num { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: rgba(37,201,138,0.25); margin-bottom: 1.5rem; }
+  .service-card:nth-child(even) .service-num { color: rgba(47,168,224,0.25); }
+  .service-icon { font-size: 1.8rem; margin-bottom: 1.2rem; }
+  .service-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.8rem; letter-spacing: 0.02em; }
+  .service-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .service-price { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+  .service-price span { font-size: 0.7rem; font-family: 'DM Sans', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-left: 0.3rem; }
 
-  /* ── PORTFOLIO ── */
+  /* PORTFOLIO */
   .portfolio-section { background: var(--bg2); }
-  .filter-bar {
-    display: flex; gap: 0.5rem;
-    margin-bottom: 3rem;
-  }
+  .filter-bar { display: flex; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
   .filter-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.5rem 1.2rem;
-    border: 1px solid rgba(201,168,76,0.2);
-    background: transparent;
-    color: var(--muted);
-    cursor: none;
-    transition: all 0.3s;
+    font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.5rem 1.2rem; border: 1px solid rgba(37,201,138,0.2);
+    background: transparent; color: var(--muted); cursor: pointer; transition: all 0.3s;
   }
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--bg);
-  }
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-  .portfolio-item {
-    position: relative;
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    cursor: none;
-  }
-  .portfolio-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1), filter 0.4s;
-    filter: grayscale(10%);
-  }
-  .portfolio-item:hover img {
-    transform: scale(1.06);
-    filter: grayscale(0%);
-  }
+  .filter-btn:hover { border-color: var(--green); color: var(--green); }
+  .filter-btn.active { background: linear-gradient(135deg, var(--green), var(--blue)); border-color: transparent; color: var(--bg); }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .portfolio-item { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+  .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1), filter 0.4s; filter: saturate(0.8); }
+  .portfolio-item:hover img { transform: scale(1.06); filter: saturate(1.1); }
   .portfolio-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,9,6,0.85) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.4s;
-    display: flex; align-items: flex-end;
-    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(5,14,13,0.88) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; align-items: flex-end; padding: 1.5rem;
   }
   .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-  .portfolio-caption {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.05em;
-  }
-  .portfolio-cat {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 0.2rem;
-  }
+  .portfolio-caption { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--white); letter-spacing: 0.05em; }
+  .portfolio-cat { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-top: 0.2rem; }
+  .portfolio-item:nth-child(4n+2) .portfolio-cat { color: var(--blue); }
+  .portfolio-item:nth-child(4n+3) .portfolio-cat { color: var(--teal); }
+  .portfolio-item.wide { grid-column: span 2; aspect-ratio: auto; min-height: 280px; }
 
-  .portfolio-item.wide {
-    grid-column: span 2;
-    aspect-ratio: auto;
-  }
-
-  /* ── PROCESS ── */
+  /* PROCESS */
   .process-section { background: var(--bg); }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-top: 4rem;
-  }
-  .process-step {
-    position: relative;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(201,168,76,0.15);
-  }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; }
+  .process-step { position: relative; padding-top: 2rem; }
+  .process-step:nth-child(1) { border-top: 2px solid var(--green); }
+  .process-step:nth-child(2) { border-top: 2px solid var(--blue); }
+  .process-step:nth-child(3) { border-top: 2px solid var(--teal); }
+  .process-step:nth-child(4) { border-top: 2px solid var(--green2); }
   .process-step::before {
-    content: attr(data-step);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 300;
-    color: rgba(201,168,76,0.12);
-    line-height: 1;
-    display: block;
-    margin-bottom: 1rem;
+    content: attr(data-step); font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300; line-height: 1; display: block; margin-bottom: 1rem;
   }
-  .process-step h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.04em;
-  }
-  .process-step p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
+  .process-step:nth-child(1)::before { color: rgba(37,201,138,0.12); }
+  .process-step:nth-child(2)::before { color: rgba(47,168,224,0.12); }
+  .process-step:nth-child(3)::before { color: rgba(26,184,184,0.12); }
+  .process-step:nth-child(4)::before { color: rgba(77,224,168,0.12); }
+  .process-step h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; letter-spacing: 0.04em; }
+  .process-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
 
-  /* ── TESTIMONIALS ── */
-  .testimonials-section {
-    background: var(--surface);
-    overflow: hidden;
-  }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 4rem;
-  }
-  .testimonial-card {
-    border: 1px solid rgba(201,168,76,0.1);
-    padding: 2.5rem;
-    position: relative;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .testimonial-card:hover {
-    border-color: rgba(201,168,76,0.3);
-    transform: translateY(-4px);
-  }
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--surface); overflow: hidden; }
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 4rem; }
+  .testimonial-card { border: 1px solid rgba(37,201,138,0.1); padding: 2.5rem; position: relative; transition: border-color 0.3s, transform 0.3s; }
+  .testimonial-card:nth-child(2) { border-color: rgba(47,168,224,0.1); }
+  .testimonial-card:nth-child(3) { border-color: rgba(26,184,184,0.1); }
+  .testimonial-card:hover { transform: translateY(-4px); }
+  .testimonial-card:nth-child(1):hover { border-color: rgba(37,201,138,0.35); }
+  .testimonial-card:nth-child(2):hover { border-color: rgba(47,168,224,0.35); }
+  .testimonial-card:nth-child(3):hover { border-color: rgba(26,184,184,0.35); }
   .testimonial-card::before {
-    content: '"';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 6rem;
-    font-weight: 300;
-    color: rgba(201,168,76,0.08);
-    position: absolute;
-    top: -0.5rem; left: 1.5rem;
-    line-height: 1;
+    content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 6rem;
+    font-weight: 300; position: absolute; top: -0.5rem; left: 1.5rem; line-height: 1;
   }
-  .testimonial-stars {
-    color: var(--gold);
-    font-size: 0.75rem;
-    margin-bottom: 1rem;
-    letter-spacing: 0.1em;
-  }
-  .testimonial-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-  .testimonial-author {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: 0.05em;
-  }
-  .testimonial-role {
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.2rem;
-  }
+  .testimonial-card:nth-child(1)::before { color: rgba(37,201,138,0.08); }
+  .testimonial-card:nth-child(2)::before { color: rgba(47,168,224,0.08); }
+  .testimonial-card:nth-child(3)::before { color: rgba(26,184,184,0.08); }
+  .testimonial-stars { font-size: 0.75rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .testimonial-card:nth-child(1) .testimonial-stars { color: var(--green); }
+  .testimonial-card:nth-child(2) .testimonial-stars { color: var(--blue); }
+  .testimonial-card:nth-child(3) .testimonial-stars { color: var(--teal); }
+  .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; font-weight: 300; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem; }
+  .testimonial-author { font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--white); letter-spacing: 0.05em; }
+  .testimonial-role { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
 
-  /* ── TOOLS ── */
+  /* TOOLS */
   .tools-section { background: var(--bg); }
-  .tools-grid {
-    display: flex; flex-wrap: wrap; gap: 1rem;
-    margin-top: 3rem;
-  }
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; }
   .tool-pill {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.7rem 1.5rem;
-    border: 1px solid rgba(201,168,76,0.2);
-    color: var(--muted);
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
+    font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.7rem 1.5rem; border: 1px solid var(--dim);
+    color: var(--muted); transition: all 0.3s; position: relative; overflow: hidden;
   }
-  .tool-pill::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-    z-index: -1;
-  }
-  .tool-pill:hover { color: var(--bg); border-color: var(--gold); }
+  .tool-pill::before { content: ''; position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1; }
+  .tool-pill:hover { color: var(--bg); border-color: transparent; }
   .tool-pill:hover::before { transform: scaleX(1); }
+  .tool-pill:nth-child(3n+1)::before { background: var(--green); }
+  .tool-pill:nth-child(3n+2)::before { background: var(--blue); }
+  .tool-pill:nth-child(3n)::before   { background: var(--teal); }
 
-  /* ── CONTACT ── */
-  .contact-section {
-    background: var(--bg2);
-    padding: 7rem 4rem;
-  }
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
+  /* CONTACT */
+  .contact-section { background: var(--bg2); padding: 7rem 4rem; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
   .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
   .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-  .form-group label {
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
+  .form-group label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--surface); border: 1px solid rgba(37,201,138,0.15);
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    padding: 0.9rem 1.2rem; outline: none; transition: border-color 0.3s;
+    resize: vertical; -webkit-appearance: none;
   }
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    background: var(--surface);
-    border: 1px solid rgba(201,168,76,0.15);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    padding: 0.9rem 1.2rem;
-    outline: none;
-    transition: border-color 0.3s;
-    cursor: none;
-    resize: vertical;
-    -webkit-appearance: none;
-  }
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: var(--gold);
-  }
+  .form-group input:focus  { border-color: var(--green); }
+  .form-group textarea:focus { border-color: var(--teal); }
+  .form-group select:focus { border-color: var(--blue); }
   .form-group select option { background: var(--surface); }
   .form-group textarea { min-height: 130px; }
   .submit-btn {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--gold);
-    color: var(--bg);
-    border: none;
-    padding: 1.1rem 2.5rem;
-    cursor: none;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    align-self: flex-start;
+    font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    color: var(--bg); border: none; padding: 1.1rem 2.5rem; cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s; align-self: flex-start;
   }
-  .submit-btn:hover {
-    background: var(--gold2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(201,168,76,0.25);
-  }
-  .contact-info { }
-  .contact-info h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-  .contact-info h3 em { font-style: italic; color: var(--gold); }
-  .contact-info p {
-    font-size: 0.9rem; color: var(--muted);
-    line-height: 1.8; margin-bottom: 2.5rem;
-  }
+  .submit-btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,201,138,0.25); }
+  .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 1.5rem; }
+  .contact-info h3 .g { font-style: italic; color: var(--green); }
+  .contact-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; }
   .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link {
-    display: flex; align-items: center; gap: 1rem;
-    text-decoration: none;
-    color: var(--text);
-    font-size: 0.9rem;
-    transition: color 0.3s;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(201,168,76,0.08);
-  }
-  .contact-link:hover { color: var(--gold); }
-  .contact-link-icon {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    transition: background 0.3s, border-color 0.3s;
-  }
-  .contact-link:hover .contact-link-icon {
-    background: var(--gold);
-    border-color: var(--gold);
-  }
-  .contact-link:hover .contact-link-icon svg { stroke: var(--bg); }
+  .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text); font-size: 0.9rem; transition: color 0.3s; padding-bottom: 1rem; border-bottom: 1px solid rgba(37,201,138,0.08); }
+  .contact-link:nth-child(2) { border-bottom-color: rgba(47,168,224,0.08); }
+  .contact-link:hover { color: var(--white); }
+  .contact-link-icon { width: 36px; height: 36px; border: 1px solid rgba(37,201,138,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; transition: background 0.3s, border-color 0.3s; }
+  .contact-link:nth-child(2) .contact-link-icon { border-color: rgba(47,168,224,0.2); }
+  .contact-link:nth-child(1):hover .contact-link-icon { background: var(--green); border-color: var(--green); }
+  .contact-link:nth-child(2):hover .contact-link-icon { background: var(--blue); border-color: var(--blue); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--bg);
-    border-top: 1px solid rgba(201,168,76,0.1);
-    padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  footer p {
-    font-size: 0.78rem; color: var(--muted);
-    letter-spacing: 0.08em;
-  }
+  /* FOOTER */
+  footer { background: var(--bg); border-top: 1px solid rgba(37,201,138,0.1); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; }
   .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-style: italic;
-    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
   .footer-socials { display: flex; gap: 1.5rem; }
-  .footer-socials a {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-socials a:hover { color: var(--gold); }
+  .footer-socials a { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+  .footer-socials a:nth-child(1):hover { color: var(--green); }
+  .footer-socials a:nth-child(2):hover { color: var(--blue); }
 
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 2rem; right: 2rem;
-    background: var(--surface);
-    border: 1px solid rgba(201,168,76,0.3);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    padding: 1rem 1.5rem;
-    z-index: 9999;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: transform 0.4s, opacity 0.4s;
-  }
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--surface); border-left: 3px solid var(--green); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; padding: 1rem 1.5rem; z-index: 9999; transform: translateY(100px); opacity: 0; transition: transform 0.4s, opacity 0.4s; }
   .toast.show { transform: translateY(0); opacity: 1; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeLeft {
-    from { opacity: 0; transform: translateX(24px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeLeft { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes scrollPulse { 0%,100% { opacity:0.3; } 50% { opacity:1; } }
+  @keyframes tickerMove { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+  .reveal { opacity:0; transform:translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── MOBILE ── */
+  /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 1.2rem 1.5rem; }
     nav.scrolled { padding: 0.8rem 1.5rem; }
     .nav-links, .nav-cta { display: none; }
     .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; min-height: auto; gap: 2.5rem; }
     .hero-right { order: -1; }
-    .hero-img-frame { max-width: 300px; margin: 0 auto; }
+    .hero-img-frame { max-width: 280px; margin: 0 auto; }
     .hero-img-overlay { left: -0.5rem; }
     section { padding: 4rem 1.5rem; }
     .stats-bar { padding: 2.5rem 1.5rem; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(201,168,76,0.1); }
-    .stat-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(37,201,138,0.08); }
     .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .services-grid { grid-template-columns: 1fr; }
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
@@ -825,16 +422,13 @@
     .process-steps { grid-template-columns: 1fr 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-section { padding: 4rem 1.5rem; }
     footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">MOS</a>
   <ul class="nav-links">
@@ -852,76 +446,54 @@
     <p class="hero-label">Visual Designer · Lagos, Nigeria</p>
     <h1 class="hero-title">
       Design that<br>
-      <em>communicates</em><br>
-      &amp; converts.
+      <span class="g">communicates</span><br>
+      &amp; <span class="b">converts.</span>
     </h1>
-    <p class="hero-sub">
-      I craft visual identities, brand systems, and marketing collateral 
-      that make businesses impossible to ignore. Every pixel is intentional.
-    </p>
+    <p class="hero-sub">I craft visual identities, brand systems, and marketing collateral that make businesses impossible to ignore. Every pixel is intentional.</p>
     <div class="hero-actions">
       <a href="#work" class="btn-primary">View My Work →</a>
       <a href="#contact" class="btn-secondary">Let's Talk</a>
     </div>
   </div>
-
   <div class="hero-right">
     <div class="hero-img-frame">
-      <img src="https://mosesosam.netlify.app/profile.jpg" alt="Moses O. Samuel" onerror="this.style.background='#1a1612';this.removeAttribute('src')">
+      <img src="https://mosesosam.netlify.app/profile.jpg" alt="Moses O. Samuel" onerror="this.style.background='#0d1e1a';this.removeAttribute('src')">
       <div class="hero-img-overlay">
-        <div>
-          <div class="stat-num">50+</div>
-          <div class="stat-label">Brands Transformed</div>
-        </div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Brands Transformed</div>
       </div>
     </div>
   </div>
-
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <div class="ticker-item"><span class="dot"></span> Brand Identity</div>
-    <div class="ticker-item"><span class="dot"></span> Logo Design</div>
-    <div class="ticker-item"><span class="dot"></span> Flyer Design</div>
-    <div class="ticker-item"><span class="dot"></span> Social Media Graphics</div>
-    <div class="ticker-item"><span class="dot"></span> Video Editing</div>
-    <div class="ticker-item"><span class="dot"></span> Visual Communication</div>
-    <div class="ticker-item"><span class="dot"></span> Packaging Design</div>
-    <div class="ticker-item"><span class="dot"></span> Brand Identity</div>
-    <div class="ticker-item"><span class="dot"></span> Logo Design</div>
-    <div class="ticker-item"><span class="dot"></span> Flyer Design</div>
-    <div class="ticker-item"><span class="dot"></span> Social Media Graphics</div>
-    <div class="ticker-item"><span class="dot"></span> Video Editing</div>
-    <div class="ticker-item"><span class="dot"></span> Visual Communication</div>
-    <div class="ticker-item"><span class="dot"></span> Packaging Design</div>
+    <div class="ticker-item"><span class="dot"></span>Brand Identity</div>
+    <div class="ticker-item"><span class="dot"></span>Logo Design</div>
+    <div class="ticker-item"><span class="dot"></span>Flyer Design</div>
+    <div class="ticker-item"><span class="dot"></span>Social Media Graphics</div>
+    <div class="ticker-item"><span class="dot"></span>Video Editing</div>
+    <div class="ticker-item"><span class="dot"></span>Visual Communication</div>
+    <div class="ticker-item"><span class="dot"></span>Packaging Design</div>
+    <div class="ticker-item"><span class="dot"></span>Brand Identity</div>
+    <div class="ticker-item"><span class="dot"></span>Logo Design</div>
+    <div class="ticker-item"><span class="dot"></span>Flyer Design</div>
+    <div class="ticker-item"><span class="dot"></span>Social Media Graphics</div>
+    <div class="ticker-item"><span class="dot"></span>Video Editing</div>
+    <div class="ticker-item"><span class="dot"></span>Visual Communication</div>
+    <div class="ticker-item"><span class="dot"></span>Packaging Design</div>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stats-grid">
-    <div class="stat-item reveal">
-      <div class="num" data-target="50">0</div>
-      <div class="lbl">Projects Completed</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="num" data-target="30">0</div>
-      <div class="lbl">Happy Clients</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="num" data-target="3">0</div>
-      <div class="lbl">Years Experience</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="num" data-target="100">0</div>
-      <div class="lbl">% Satisfaction Rate</div>
-    </div>
+    <div class="stat-item reveal"><div class="num" data-target="50">0</div><div class="lbl">Projects Completed</div></div>
+    <div class="stat-item reveal"><div class="num" data-target="30">0</div><div class="lbl">Happy Clients</div></div>
+    <div class="stat-item reveal"><div class="num" data-target="3">0</div><div class="lbl">Years Experience</div></div>
+    <div class="stat-item reveal"><div class="num" data-target="100">0</div><div class="lbl">% Satisfaction Rate</div></div>
   </div>
 </div>
 
@@ -930,196 +502,73 @@
   <div class="services-header reveal">
     <div>
       <p class="section-label">What I Offer</p>
-      <h2 class="section-title">Services &amp;<br><em>Pricing</em></h2>
+      <h2 class="section-title">Services &amp;<br><span class="g">Pricing</span></h2>
     </div>
     <a href="#contact" class="btn-secondary">Get a Custom Quote →</a>
   </div>
   <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-num">01</div>
-      <div class="service-icon">⬡</div>
-      <h3 class="service-title">Logo & Brand Identity</h3>
-      <p class="service-desc">A complete visual identity system including primary logo, variations, color palette, typography, and brand guidelines document.</p>
-      <div class="service-price">From ₦50,000 <span>/ package</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-num">02</div>
-      <div class="service-icon">◈</div>
-      <h3 class="service-title">Flyer & Event Design</h3>
-      <p class="service-desc">High-impact promotional designs for events, products, and campaigns — print-ready and optimised for digital sharing.</p>
-      <div class="service-price">From ₦10,000 <span>/ design</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-num">03</div>
-      <div class="service-icon">▣</div>
-      <h3 class="service-title">Social Media Graphics</h3>
-      <p class="service-desc">Consistent, scroll-stopping content templates and custom posts for Instagram, Facebook, LinkedIn, and more.</p>
-      <div class="service-price">From ₦25,000 <span>/ month</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-num">04</div>
-      <div class="service-icon">◉</div>
-      <h3 class="service-title">Video Editing</h3>
-      <p class="service-desc">Engaging short-form and long-form video edits with motion graphics, captions, and professional colour grading.</p>
-      <div class="service-price">From ₦20,000 <span>/ video</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-num">05</div>
-      <div class="service-icon">◆</div>
-      <h3 class="service-title">Packaging Design</h3>
-      <p class="service-desc">Product packaging that sells — labels, boxes, sachets, and wrappers that stand out on shelves and online stores.</p>
-      <div class="service-price">From ₦35,000 <span>/ project</span></div>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-num">06</div>
-      <div class="service-icon">◈</div>
-      <h3 class="service-title">Full Brand Package</h3>
-      <p class="service-desc">Everything your business needs: logo, stationery, social templates, flyers, video intro, and a brand style guide.</p>
-      <div class="service-price">From ₦150,000 <span>/ package</span></div>
-    </div>
+    <div class="service-card reveal"><div class="service-num">01</div><div class="service-icon">⬡</div><h3 class="service-title">Logo & Brand Identity</h3><p class="service-desc">A complete visual identity system — primary logo, variations, color palette, typography, and brand guidelines.</p><div class="service-price">From ₦50,000 <span>/ package</span></div></div>
+    <div class="service-card reveal"><div class="service-num">02</div><div class="service-icon">◈</div><h3 class="service-title">Flyer & Event Design</h3><p class="service-desc">High-impact promotional designs for events, products, and campaigns — print-ready and digital-optimised.</p><div class="service-price">From ₦10,000 <span>/ design</span></div></div>
+    <div class="service-card reveal"><div class="service-num">03</div><div class="service-icon">▣</div><h3 class="service-title">Social Media Graphics</h3><p class="service-desc">Consistent, scroll-stopping templates and custom posts for Instagram, Facebook, LinkedIn, and more.</p><div class="service-price">From ₦25,000 <span>/ month</span></div></div>
+    <div class="service-card reveal"><div class="service-num">04</div><div class="service-icon">◉</div><h3 class="service-title">Video Editing</h3><p class="service-desc">Engaging short-form and long-form video edits with motion graphics, captions, and colour grading.</p><div class="service-price">From ₦20,000 <span>/ video</span></div></div>
+    <div class="service-card reveal"><div class="service-num">05</div><div class="service-icon">◆</div><h3 class="service-title">Packaging Design</h3><p class="service-desc">Product packaging that sells — labels, boxes, sachets, and wrappers that stand out on shelves and online.</p><div class="service-price">From ₦35,000 <span>/ project</span></div></div>
+    <div class="service-card reveal"><div class="service-num">06</div><div class="service-icon">◈</div><h3 class="service-title">Full Brand Package</h3><p class="service-desc">Everything your business needs: logo, stationery, social templates, flyers, video intro, and a brand style guide.</p><div class="service-price">From ₦150,000 <span>/ package</span></div></div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="portfolio-section" id="work">
   <p class="section-label reveal">Selected Works</p>
-  <h2 class="section-title reveal">Recent <em>Projects</em></h2>
-  <div class="filter-bar reveal" id="filterBar">
+  <h2 class="section-title reveal">Recent <span class="g">Projects</span></h2>
+  <div class="filter-bar reveal">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="logo">Logos</button>
     <button class="filter-btn" data-filter="flyer">Flyers</button>
     <button class="filter-btn" data-filter="social">Social</button>
   </div>
-  <div class="portfolio-grid" id="portfolioGrid">
-    <div class="portfolio-item reveal" data-cat="flyer">
-      <img src="https://mosesosam.netlify.app/flyer1.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Event Promo</div><div class="portfolio-cat">Flyer Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="flyer">
-      <img src="https://mosesosam.netlify.app/flyer2.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Brand Campaign</div><div class="portfolio-cat">Flyer Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="logo">
-      <img src="https://mosesosam.netlify.app/flyer3.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Corporate Identity</div><div class="portfolio-cat">Logo Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="social">
-      <img src="https://mosesosam.netlify.app/flyer4.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Social Post</div><div class="portfolio-cat">Social Media</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item wide reveal" data-cat="flyer">
-      <img src="https://mosesosam.netlify.app/flyer5.jpg" alt="Design work" loading="lazy" style="object-position:center top;">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Full-Width Feature</div><div class="portfolio-cat">Flyer Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="social">
-      <img src="https://mosesosam.netlify.app/flyer6.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Brand Social</div><div class="portfolio-cat">Social Media</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="flyer">
-      <img src="https://mosesosam.netlify.app/flyer7.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Product Promo</div><div class="portfolio-cat">Flyer Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="logo">
-      <img src="https://mosesosam.netlify.app/flyer8.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Brand Mark</div><div class="portfolio-cat">Logo Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="flyer">
-      <img src="https://mosesosam.netlify.app/flyer9.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Event Flyer</div><div class="portfolio-cat">Flyer Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="social">
-      <img src="https://mosesosam.netlify.app/flyer10.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Social Campaign</div><div class="portfolio-cat">Social Media</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="flyer">
-      <img src="https://mosesosam.netlify.app/flyer11.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Promotional</div><div class="portfolio-cat">Flyer Design</div></div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal" data-cat="logo">
-      <img src="https://mosesosam.netlify.app/flyer12.jpg" alt="Design work" loading="lazy">
-      <div class="portfolio-overlay">
-        <div><div class="portfolio-caption">Identity System</div><div class="portfolio-cat">Logo Design</div></div>
-      </div>
-    </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item reveal" data-cat="flyer"><img src="https://mosesosam.netlify.app/flyer1.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Event Promo</div><div class="portfolio-cat">Flyer Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="flyer"><img src="https://mosesosam.netlify.app/flyer2.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Brand Campaign</div><div class="portfolio-cat">Flyer Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="logo"><img src="https://mosesosam.netlify.app/flyer3.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Corporate Identity</div><div class="portfolio-cat">Logo Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="social"><img src="https://mosesosam.netlify.app/flyer4.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Social Post</div><div class="portfolio-cat">Social Media</div></div></div></div>
+    <div class="portfolio-item wide reveal" data-cat="flyer"><img src="https://mosesosam.netlify.app/flyer5.jpg" alt="" loading="lazy" style="object-position:center top;"><div class="portfolio-overlay"><div><div class="portfolio-caption">Feature Campaign</div><div class="portfolio-cat">Flyer Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="social"><img src="https://mosesosam.netlify.app/flyer6.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Brand Social</div><div class="portfolio-cat">Social Media</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="flyer"><img src="https://mosesosam.netlify.app/flyer7.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Product Promo</div><div class="portfolio-cat">Flyer Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="logo"><img src="https://mosesosam.netlify.app/flyer8.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Brand Mark</div><div class="portfolio-cat">Logo Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="flyer"><img src="https://mosesosam.netlify.app/flyer9.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Event Flyer</div><div class="portfolio-cat">Flyer Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="social"><img src="https://mosesosam.netlify.app/flyer10.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Social Campaign</div><div class="portfolio-cat">Social Media</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="flyer"><img src="https://mosesosam.netlify.app/flyer11.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Promotional</div><div class="portfolio-cat">Flyer Design</div></div></div></div>
+    <div class="portfolio-item reveal" data-cat="logo"><img src="https://mosesosam.netlify.app/flyer12.jpg" alt="" loading="lazy"><div class="portfolio-overlay"><div><div class="portfolio-caption">Identity System</div><div class="portfolio-cat">Logo Design</div></div></div></div>
   </div>
 </section>
 
 <!-- PROCESS -->
 <section class="process-section" id="process">
   <p class="section-label reveal">How I Work</p>
-  <h2 class="section-title reveal">The Design <em>Process</em></h2>
+  <h2 class="section-title reveal">The Design <span class="b">Process</span></h2>
   <div class="process-steps">
-    <div class="process-step reveal" data-step="01">
-      <h3>Discovery</h3>
-      <p>We start with a brief consultation to understand your brand, audience, goals, and vision. No guesswork — just clarity.</p>
-    </div>
-    <div class="process-step reveal" data-step="02">
-      <h3>Strategy</h3>
-      <p>I research your market and competitors, then develop a design strategy that positions you to stand out.</p>
-    </div>
-    <div class="process-step reveal" data-step="03">
-      <h3>Design</h3>
-      <p>Concepts are crafted with intention. You receive 2–3 initial directions with full rationale, then we refine together.</p>
-    </div>
-    <div class="process-step reveal" data-step="04">
-      <h3>Delivery</h3>
-      <p>All files delivered in your required formats — print, web, social — along with usage guidelines. Done.</p>
-    </div>
+    <div class="process-step reveal" data-step="01"><h3>Discovery</h3><p>We start with a brief consultation to understand your brand, audience, goals, and vision. No guesswork — just clarity.</p></div>
+    <div class="process-step reveal" data-step="02"><h3>Strategy</h3><p>I research your market and competitors, then develop a design strategy that positions you to stand out.</p></div>
+    <div class="process-step reveal" data-step="03"><h3>Design</h3><p>Concepts are crafted with intention. You receive 2–3 initial directions with full rationale, then we refine together.</p></div>
+    <div class="process-step reveal" data-step="04"><h3>Delivery</h3><p>All files delivered in your required formats — print, web, social — along with usage guidelines. Done.</p></div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials-section" id="testimonials">
+<section class="testimonials-section">
   <p class="section-label reveal">Client Love</p>
-  <h2 class="section-title reveal">What They're<br><em>Saying</em></h2>
+  <h2 class="section-title reveal">What They're <span class="b">Saying</span></h2>
   <div class="testimonials-grid">
-    <div class="testimonial-card reveal">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"Moses created an amazing flyer for our event! Highly professional and creative. The turnaround was faster than I expected."</p>
-      <div class="testimonial-author">Tolulope George</div>
-      <div class="testimonial-role">Event Organiser</div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"The branding work was exceptional. Our products now have a fresh, modern look that customers genuinely comment on."</p>
-      <div class="testimonial-author">Kenneth Nyong</div>
-      <div class="testimonial-role">Business Owner</div>
-    </div>
-    <div class="testimonial-card reveal">
-      <div class="testimonial-stars">★★★★★</div>
-      <p class="testimonial-text">"I loved how my social media graphics stood out. Moses is a true designer who understands what brands need."</p>
-      <div class="testimonial-author">Sarah Daniel</div>
-      <div class="testimonial-role">Content Creator</div>
-    </div>
+    <div class="testimonial-card reveal"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Moses created an amazing flyer for our event! Highly professional and creative. The turnaround was faster than I expected."</p><div class="testimonial-author">Tolulope George</div><div class="testimonial-role">Event Organiser</div></div>
+    <div class="testimonial-card reveal"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The branding work was exceptional. Our products now have a fresh, modern look that customers genuinely comment on."</p><div class="testimonial-author">Kenneth Nyong</div><div class="testimonial-role">Business Owner</div></div>
+    <div class="testimonial-card reveal"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"I loved how my social media graphics stood out. Moses is a true designer who understands what brands need."</p><div class="testimonial-author">Sarah Daniel</div><div class="testimonial-role">Content Creator</div></div>
   </div>
 </section>
 
 <!-- TOOLS -->
 <section class="tools-section">
   <p class="section-label reveal">My Arsenal</p>
-  <h2 class="section-title reveal">Tools &amp; <em>Software</em></h2>
+  <h2 class="section-title reveal">Tools &amp; <span class="g">Software</span></h2>
   <div class="tools-grid reveal">
     <div class="tool-pill">Adobe Photoshop</div>
     <div class="tool-pill">Adobe Illustrator</div>
@@ -1137,7 +586,7 @@
   <div class="contact-inner">
     <div class="contact-info reveal">
       <p class="section-label">Let's Talk</p>
-      <h3>Ready to build<br>something <em>remarkable?</em></h3>
+      <h3>Ready to build<br>something <span class="g">remarkable?</span></h3>
       <p>Fill the form or reach me directly. I respond within 24 hours and I'm available for projects across Nigeria and internationally.</p>
       <div class="contact-links">
         <a href="mailto:samuelmoseslatest@gmail.com" class="contact-link">
@@ -1154,17 +603,10 @@
         </a>
       </div>
     </div>
-
-    <form class="contact-form reveal" id="contactForm">
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" placeholder="e.g. Emeka Okafor" required>
-      </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="you@example.com" required>
-      </div>
-      <div class="form-group">
+    <form class="contact-form" id="contactForm">
+      <div class="form-group reveal"><label>Your Name</label><input type="text" placeholder="e.g. Emeka Okafor" required></div>
+      <div class="form-group reveal"><label>Email Address</label><input type="email" placeholder="you@example.com" required></div>
+      <div class="form-group reveal">
         <label>Service Needed</label>
         <select>
           <option value="">Select a service…</option>
@@ -1177,16 +619,12 @@
           <option>Other</option>
         </select>
       </div>
-      <div class="form-group">
-        <label>Project Details</label>
-        <textarea placeholder="Tell me about your project, deadline, and budget…"></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Send Message →</button>
+      <div class="form-group reveal"><label>Project Details</label><textarea placeholder="Tell me about your project, deadline, and budget…"></textarea></div>
+      <button type="submit" class="submit-btn reveal">Send Message →</button>
     </form>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Moses O. Samuel</div>
   <p>© 2025 Moses O. Samuel. All rights reserved.</p>
@@ -1196,103 +634,65 @@
   </div>
 </footer>
 
-<div class="toast" id="toast">✓ Message sent! I'll reply within 24hrs.</div>
+<div class="toast" id="toast">✓ Message sent! I'll reply within 24 hrs.</div>
 
 <script>
-// Custom cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-});
-
-function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-document.querySelectorAll('a, button, .portfolio-item, .service-card, .tool-pill').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
-});
-
 // Nav scroll
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
-});
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
 
-// Reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
     if (e.isIntersecting) {
-      const delay = Array.from(e.target.parentElement.children).indexOf(e.target) * 80;
-      setTimeout(() => e.target.classList.add('visible'), delay);
-      observer.unobserve(e.target);
+      const idx = Array.from(e.target.parentElement.children).indexOf(e.target);
+      setTimeout(() => e.target.classList.add('visible'), idx * 80);
+      obs.unobserve(e.target);
     }
   });
 }, { threshold: 0.12 });
-reveals.forEach(r => observer.observe(r));
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
 // Counter animation
 function animateCounter(el, target) {
   let start = 0;
-  const duration = 1600;
-  const step = timestamp => {
-    if (!start) start = timestamp;
-    const progress = Math.min((timestamp - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.floor(eased * target) + (target === 100 ? '' : '+');
-    if (progress < 1) requestAnimationFrame(step);
+  const step = ts => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / 1600, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(e * target) + (target === 100 ? '' : '+');
+    if (p < 1) requestAnimationFrame(step);
     else el.textContent = target + (target === 100 ? '' : '+');
   };
   requestAnimationFrame(step);
 }
-
-const counterObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const target = parseInt(e.target.dataset.target);
-      animateCounter(e.target, target);
-      counterObs.unobserve(e.target);
-    }
-  });
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target, +e.target.dataset.target); cObs.unobserve(e.target); } });
 }, { threshold: 0.5 });
-document.querySelectorAll('.num[data-target]').forEach(n => counterObs.observe(n));
+document.querySelectorAll('.num[data-target]').forEach(n => cObs.observe(n));
 
-// Portfolio filter
-const filterBtns = document.querySelectorAll('.filter-btn');
-const items = document.querySelectorAll('.portfolio-item');
-filterBtns.forEach(btn => {
+// Filter
+document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    items.forEach(item => {
-      const match = filter === 'all' || item.dataset.cat === filter;
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      const show = f === 'all' || item.dataset.cat === f;
       item.style.transition = 'opacity 0.4s, transform 0.4s';
-      item.style.opacity = match ? '1' : '0.15';
-      item.style.transform = match ? 'scale(1)' : 'scale(0.97)';
-      item.style.pointerEvents = match ? 'auto' : 'none';
+      item.style.opacity = show ? '1' : '0.12';
+      item.style.transform = show ? 'scale(1)' : 'scale(0.97)';
+      item.style.pointerEvents = show ? 'auto' : 'none';
     });
   });
 });
 
-// Form submit
+// Form
 document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4000);
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
   e.target.reset();
 });
 </script>
